@@ -8,3 +8,12 @@
 
 ## 使用方式
 
+- [使用文档](https://github.com/kongchong/exception-notice-spring-boot-starter/wiki/%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F)
+
+## 注意
+
+本工具仅支持集成在springboot项目中，同时需要jdk版本1.8以上
+
+# 作者
+- 孔冲 1182701220@qq.com
+- 博客 http://www.kcblog.cn
