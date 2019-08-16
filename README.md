@@ -14,6 +14,13 @@
 
 本工具仅支持集成在springboot项目中，同时需要jdk版本1.8以上
 
+
+## 致谢
+
+本项目参考以下项目：
+
+1. [prometheus-spring-boot-starter](https://gitee.com/ITEater/prometheus-spring-boot-starter)
+
 # 作者
 - 孔冲 1182701220@qq.com
 - 博客 http://www.kcblog.cn
