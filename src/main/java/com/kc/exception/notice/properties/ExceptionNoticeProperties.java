@@ -12,7 +12,6 @@ import java.util.List;
  * 异常通知配置
  *
  * @author kongchong
- * date: 2019-08-09 16:35
  */
 @Data
 @ConfigurationProperties(prefix = ExceptionNoticeProperties.PREFIX)

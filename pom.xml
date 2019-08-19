@@ -21,9 +21,10 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/kongchong/exception-notice-spring-boot-starter.git</url>
+        <tag>master</tag>
         <connection>scm:git:https://github.com/kongchong/exception-notice-spring-boot-starter.git</connection>
-        <developerConnection>http://www.kcblog.cn</developerConnection>
+        <developerConnection>scm:git:https://github.com/kongchong/exception-notice-spring-boot-starter.git</developerConnection>
+        <url>https://github.com/kongchong/exception-notice-spring-boot-starter.git</url>
     </scm>
 
     <developers>

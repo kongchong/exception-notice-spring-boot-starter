@@ -13,8 +13,6 @@ public interface INoticeProcessor {
      * 异常信息通知
      *
      * @param exceptionInfo 异常信息
-     * @author kongchong
-     * date: 2019-08-14 16:43
      */
     void sendNotice(ExceptionInfo exceptionInfo);
 

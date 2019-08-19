@@ -17,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
  * 异常信息通知配置类
  *
  * @author kongchong
- * date: 2019-08-09 15:18
  */
 @Configuration
 @ConditionalOnProperty(prefix = ExceptionNoticeProperties.PREFIX, name = "enable", havingValue = "true")
