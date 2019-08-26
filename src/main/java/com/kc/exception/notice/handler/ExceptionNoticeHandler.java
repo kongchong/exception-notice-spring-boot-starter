@@ -3,6 +3,7 @@ package com.kc.exception.notice.handler;
 import com.kc.exception.notice.content.ExceptionInfo;
 import com.kc.exception.notice.process.INoticeProcessor;
 import com.kc.exception.notice.properties.ExceptionNoticeProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -26,7 +27,10 @@ import java.util.concurrent.*;
  *
  * @author kongchong
  */
+@Slf4j
 public class ExceptionNoticeHandler {
+
+    private final String SEPARATOR = System.getProperty("line.separator");
 
     private final ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
 
@@ -42,10 +46,14 @@ public class ExceptionNoticeHandler {
         this.exceptionNotice = exceptionNotice;
     }
 
+    /**
+     * 将捕获到的异常信息封装好之后发送到阻塞队列
+     */
     public Boolean createNotice(Exception ex, JoinPoint joinPoint) {
         if (containsException(ex)) {
             return null;
         }
+        log.error("捕获到异常开始发送消息通知:{}method:{}--->", SEPARATOR, joinPoint.getSignature().getName());
         //获取请求参数
         Object parameter = getParameter(joinPoint);
         //获取当前请求对象
@@ -62,6 +70,9 @@ public class ExceptionNoticeHandler {
         return exceptionInfoBlockingDeque.offer(exceptionInfo);
     }
 
+    /**
+     * 启动定时任务发送异常通知
+     */
     public void start() {
         executor.scheduleAtFixedRate(() -> {
             ExceptionInfo exceptionInfo = exceptionInfoBlockingDeque.poll();

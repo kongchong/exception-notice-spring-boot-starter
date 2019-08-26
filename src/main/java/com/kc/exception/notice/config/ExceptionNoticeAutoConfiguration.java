@@ -27,15 +27,15 @@ public class ExceptionNoticeAutoConfiguration {
 
     @Bean(initMethod = "start")
     public ExceptionNoticeHandler noticeHandler(ExceptionNoticeProperties properties) {
-        DingTalkProperties dingTalk = properties.getDingTalk();
-        INoticeProcessor exceptionNotice = null;
-        if (null != dingTalk) {
-            exceptionNotice = new DingTalkNoticeProcessor(restTemplate, properties);
+        DingTalkProperties dingTalkProperties = properties.getDingTalk();
+        INoticeProcessor noticeProcessor = null;
+        if (null != dingTalkProperties) {
+            noticeProcessor = new DingTalkNoticeProcessor(restTemplate, dingTalkProperties);
         }
-        if (null == exceptionNotice) {
-            throw new IllegalArgumentException("异常通知配置不正确");
+        if (null == noticeProcessor) {
+            throw new IllegalArgumentException("Exception notification configuration is incorrect");
         }
-        return new ExceptionNoticeHandler(properties, exceptionNotice);
+        return new ExceptionNoticeHandler(properties, noticeProcessor);
     }
 
     @Bean

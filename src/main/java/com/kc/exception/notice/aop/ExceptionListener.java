@@ -17,13 +17,10 @@ import org.aspectj.lang.annotation.Aspect;
 @RequiredArgsConstructor
 public class ExceptionListener {
 
-    private static final String SEPARATOR = System.getProperty("line.separator");
-
     private final ExceptionNoticeHandler handler;
 
     @AfterThrowing(value = "@within(org.springframework.web.bind.annotation.RestController) || @within(org.springframework.stereotype.Controller)", throwing = "e")
     public void doAfterThrow(JoinPoint joinPoint, Exception e) {
-        log.error("捕获到异常发送消息至钉钉:{}method:{}--->", SEPARATOR, joinPoint.getSignature().getName());
         handler.createNotice(e, joinPoint);
     }
 }
