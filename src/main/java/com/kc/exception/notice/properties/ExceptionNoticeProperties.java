@@ -44,4 +44,9 @@ public class ExceptionNoticeProperties {
      */
     @NestedConfigurationProperty
     private DingTalkProperties dingTalk;
+    /**
+     * 邮箱通知配置
+     */
+    @NestedConfigurationProperty
+    private MailProperties mail;
 }

@@ -38,12 +38,12 @@ public class ExceptionNoticeHandler {
 
     private final ExceptionNoticeProperties exceptionProperties;
 
-    private final INoticeProcessor exceptionNotice;
+    private final List<INoticeProcessor> noticeProcessors;
 
     public ExceptionNoticeHandler(ExceptionNoticeProperties exceptionProperties,
-                                  INoticeProcessor exceptionNotice) {
+                                  List<INoticeProcessor> noticeProcessors) {
         this.exceptionProperties = exceptionProperties;
-        this.exceptionNotice = exceptionNotice;
+        this.noticeProcessors = noticeProcessors;
     }
 
     /**
@@ -77,7 +77,7 @@ public class ExceptionNoticeHandler {
         executor.scheduleAtFixedRate(() -> {
             ExceptionInfo exceptionInfo = exceptionInfoBlockingDeque.poll();
             if (null != exceptionInfo) {
-                exceptionNotice.sendNotice(exceptionInfo);
+                noticeProcessors.forEach(noticeProcessor -> noticeProcessor.sendNotice(exceptionInfo));
             }
         }, 6, exceptionProperties.getPeriod(), TimeUnit.SECONDS);
     }
