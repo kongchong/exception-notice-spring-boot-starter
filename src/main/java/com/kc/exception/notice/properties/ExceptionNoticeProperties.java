@@ -32,9 +32,9 @@ public class ExceptionNoticeProperties {
      */
     private String includedTracePackage;
     /**
-     * 异常信息发送的时间周期 以秒为单位 默认3s
+     * 异常信息发送的时间周期 以秒为单位 默认5s
      */
-    private Long period = 3L;
+    private Long period = 5L;
     /**
      * 排除的需要统计的异常
      */
