@@ -49,4 +49,9 @@ public class ExceptionNoticeProperties {
      */
     @NestedConfigurationProperty
     private MailProperties mail;
+    /**
+     * 企业微信通知配置
+     */
+    @NestedConfigurationProperty
+    private WeChatProperties weChat;
 }

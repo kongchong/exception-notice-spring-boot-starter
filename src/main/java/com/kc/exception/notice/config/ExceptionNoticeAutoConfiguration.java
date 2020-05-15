@@ -5,9 +5,11 @@ import com.kc.exception.notice.handler.ExceptionNoticeHandler;
 import com.kc.exception.notice.process.DingTalkNoticeProcessor;
 import com.kc.exception.notice.process.MailNoticeProcessor;
 import com.kc.exception.notice.process.INoticeProcessor;
+import com.kc.exception.notice.process.WeChatNoticeProcessor;
 import com.kc.exception.notice.properties.DingTalkProperties;
 import com.kc.exception.notice.properties.MailProperties;
 import com.kc.exception.notice.properties.ExceptionNoticeProperties;
+import com.kc.exception.notice.properties.WeChatProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -45,12 +47,17 @@ public class ExceptionNoticeAutoConfiguration {
             noticeProcessor = new DingTalkNoticeProcessor(restTemplate, dingTalkProperties);
             noticeProcessors.add(noticeProcessor);
         }
+        WeChatProperties weChatProperties = properties.getWeChat();
+        if (null != weChatProperties) {
+            noticeProcessor = new WeChatNoticeProcessor(restTemplate, weChatProperties);
+            noticeProcessors.add(noticeProcessor);
+        }
         MailProperties email = properties.getMail();
         if (null != email && null != mailSender) {
             noticeProcessor = new MailNoticeProcessor(mailSender, email);
             noticeProcessors.add(noticeProcessor);
         }
-        Assert.isTrue(noticeProcessors.size() != 0,"Exception notification configuration is incorrect");
+        Assert.isTrue(noticeProcessors.size() != 0, "Exception notification configuration is incorrect");
         return new ExceptionNoticeHandler(properties, noticeProcessors);
     }
 
