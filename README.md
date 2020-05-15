@@ -15,7 +15,7 @@ pom.xml中增加项目依赖
   <dependency>
      <groupId>com.github.kongchong</groupId>
      <artifactId>exception-notice-spring-boot-starter</artifactId>
-     <version>1.1.0</version>
+     <version>1.2.0</version>
   </dependency>
 ```
 #### 钉钉配置
