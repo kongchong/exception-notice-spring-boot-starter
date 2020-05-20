@@ -6,7 +6,7 @@
     <groupId>com.github.kongchong</groupId>
     <artifactId>exception-notice-spring-boot-starter</artifactId>
     <name>exception-notice-spring-boot-starter</name>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <url>https://github.com/kongchong/exception-notice-spring-boot-starter.git</url>
     <description>a spring boot starter for exception notice</description>
 
@@ -118,6 +118,12 @@
                                     <goal>jar</goal>
                                 </goals>
                             </execution>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
                         </executions>
                     </plugin>
                     <!-- java编译插件 -->
@@ -129,20 +135,6 @@
                             <target>${java.version}</target>
                             <encoding>${project.build.sourceEncoding}</encoding>
                         </configuration>
-                    </plugin>
-                    <!-- Source -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-source-plugin</artifactId>
-                        <version>${maven-source-plugin.version}</version>
-                        <executions>
-                            <execution>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>jar-no-fork</goal>
-                                </goals>
-                            </execution>
-                        </executions>
                     </plugin>
                     <!-- Javadoc -->
                     <plugin>

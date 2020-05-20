@@ -1,7 +1,7 @@
 package com.kc.exception.notice.process;
 
-import com.kc.exception.notice.content.WeChatExceptionInfo;
 import com.kc.exception.notice.content.ExceptionInfo;
+import com.kc.exception.notice.content.WeChatExceptionInfo;
 import com.kc.exception.notice.properties.WeChatProperties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,15 +24,13 @@ public class WeChatNoticeProcessor implements INoticeProcessor {
     public WeChatNoticeProcessor(RestTemplate restTemplate,
                                  WeChatProperties weChatProperties) {
         Assert.hasText(weChatProperties.getWebHook(), "WeChat webHook must not be null");
-        Assert.hasText(weChatProperties.getMsgType(), "WeChat msgType must not be null");
         this.weChatProperties = weChatProperties;
         this.restTemplate = restTemplate;
     }
 
     @Override
     public void sendNotice(ExceptionInfo exceptionInfo) {
-        WeChatExceptionInfo weChatNoticeProcessor = new WeChatExceptionInfo(weChatProperties.getMsgType(), exceptionInfo,
-                weChatProperties.getAtUserIds(), weChatProperties.getAtPhones());
+        WeChatExceptionInfo weChatNoticeProcessor = new WeChatExceptionInfo(exceptionInfo, weChatProperties);
         String result = restTemplate.postForObject(weChatProperties.getWebHook(), weChatNoticeProcessor, String.class);
         logger.debug(result);
     }

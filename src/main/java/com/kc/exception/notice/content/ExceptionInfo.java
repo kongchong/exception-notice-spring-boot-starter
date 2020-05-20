@@ -109,19 +109,35 @@ public class ExceptionInfo {
         return stringBuilder.toString();
     }
 
-    public String createMarkDownText() {
+    public String createWeChatMarkDown() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(">项目名称：<font color=\"info\">").append(project).append("</font>").append("\n");
-        stringBuilder.append(">类路径：<font color=\"info\">").append(classPath).append("</font>").append("\n");
+        stringBuilder.append(">项目名称：> <font color=\"info\">").append(project).append("</font>").append("\n");
+        stringBuilder.append(">类路径：> <font color=\"info\">").append(classPath).append("</font>").append("\n");
         stringBuilder.append(">请求地址：<font color=\"info\">").append(reqAddress).append("</font>").append("\n");
         stringBuilder.append(">方法名：<font color=\"info\">").append(methodName).append("</font>").append("\n");
         if (params != null) {
             stringBuilder.append(">方法参数：<font color=\"info\">").append(params).append("</font>").append("\n");
         }
-        stringBuilder.append("异常信息：<font color=\"red\">").append("\n").append(exceptionMessage).append("</font>").append("\n");
-        stringBuilder.append("异常追踪：<font color=\"info\">").append("\n").append(String.join("\n", traceInfo)).append("</font>").append("\n");
-        stringBuilder.append("最后一次出现时间：<font color=\"info\">")
+        stringBuilder.append(">异常信息：<font color=\"red\">").append("\n").append(exceptionMessage).append("</font>").append("\n");
+        stringBuilder.append(">异常追踪：<font color=\"info\">").append("\n").append(String.join("\n", traceInfo)).append("</font>").append("\n");
+        stringBuilder.append(">最后一次出现时间：<font color=\"info\">")
                 .append(latestShowTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("</font>");
+        return stringBuilder.toString();
+    }
+
+    public String createDingTalkMarkDown() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("#### 项目名称：").append("\n").append("> ").append(project).append("\n");
+        stringBuilder.append("#### 类路径：").append("\n").append("> ").append(classPath).append("\n");
+        stringBuilder.append("#### 请求地址：").append("\n").append("> ").append(reqAddress).append("\n");
+        stringBuilder.append("#### 方法名：").append("\n").append("> ").append(methodName).append("\n");
+        if (params != null) {
+            stringBuilder.append("#### 方法参数：").append(params).append("\n");
+        }
+        stringBuilder.append("#### 异常信息：").append("\n").append("> ").append(exceptionMessage).append("\n");
+        stringBuilder.append("#### 异常追踪：").append("\n").append("> ").append(String.join("\n", traceInfo)).append("\n");
+        stringBuilder.append("#### 最后一次出现时间：")
+                .append(latestShowTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
         return stringBuilder.toString();
     }
 

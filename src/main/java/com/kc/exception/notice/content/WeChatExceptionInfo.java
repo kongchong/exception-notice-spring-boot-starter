@@ -1,8 +1,13 @@
 package com.kc.exception.notice.content;
 
+import com.kc.exception.notice.enums.WeChatMsgTypeEnum;
+import com.kc.exception.notice.properties.WeChatProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import static com.kc.exception.notice.enums.WeChatMsgTypeEnum.MARKDOWN;
+import static com.kc.exception.notice.enums.WeChatMsgTypeEnum.TEXT;
 
 /**
  * 企业微信异常通知消息请求体
@@ -16,13 +21,14 @@ public class WeChatExceptionInfo {
     private WeChatMarkDown markdown;
     private String msgtype;
 
-    public WeChatExceptionInfo(String msgType, ExceptionInfo exceptionInfo, String[] mentioned_list, String[] mentioned_mobile_list) {
-        this.msgtype = msgType;
-        if (msgType.equals("text")) {
-            this.text = new WeChatText(exceptionInfo.createText(), mentioned_list, mentioned_mobile_list);
-        } else if (msgType.equals("markdown")) {
-            this.markdown = new WeChatMarkDown(exceptionInfo.createMarkDownText());
+    public WeChatExceptionInfo(ExceptionInfo exceptionInfo, WeChatProperties weChatProperties) {
+        WeChatMsgTypeEnum msgType = weChatProperties.getMsgType();
+        if (msgType.equals(TEXT)) {
+            this.text = new WeChatText(exceptionInfo.createText(), weChatProperties.getAtUserIds(), weChatProperties.getAtPhones());
+        } else if (msgType.equals(MARKDOWN)) {
+            this.markdown = new WeChatMarkDown(exceptionInfo.createWeChatMarkDown());
         }
+        this.msgtype = msgType.getMsgType();
     }
 
     @NoArgsConstructor

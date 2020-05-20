@@ -1,6 +1,9 @@
 package com.kc.exception.notice.properties;
 
+import com.kc.exception.notice.enums.WeChatMsgTypeEnum;
 import lombok.Data;
+
+import static com.kc.exception.notice.enums.WeChatMsgTypeEnum.TEXT;
 
 /**
  * 企业微信机器人配置
@@ -28,5 +31,5 @@ public class WeChatProperties {
     /**
      * 消息类型 暂只支持text和markdown
      */
-    private String msgType;
+    private WeChatMsgTypeEnum msgType = TEXT;
 }
