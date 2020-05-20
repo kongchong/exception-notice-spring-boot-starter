@@ -118,10 +118,10 @@ public class ExceptionInfo {
         if (params != null) {
             stringBuilder.append(">方法参数：<font color=\"info\">").append(params).append("</font>").append("\n");
         }
-        stringBuilder.append("异常信息：<font color=\"info\">").append("\n").append(exceptionMessage).append("</font>").append("\n");
+        stringBuilder.append("异常信息：<font color=\"red\">").append("\n").append(exceptionMessage).append("</font>").append("\n");
         stringBuilder.append("异常追踪：<font color=\"info\">").append("\n").append(String.join("\n", traceInfo)).append("</font>").append("\n");
-        stringBuilder.append("最后一次出现时间：")
-                .append(latestShowTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        stringBuilder.append("最后一次出现时间：<font color=\"info\">")
+                .append(latestShowTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))).append("</font>");
         return stringBuilder.toString();
     }
 
