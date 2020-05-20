@@ -15,7 +15,7 @@ pom.xml中增加项目依赖
   <dependency>
      <groupId>com.github.kongchong</groupId>
      <artifactId>exception-notice-spring-boot-starter</artifactId>
-     <version>1.2.0</version>
+     <version>1.2.2</version>
   </dependency>
 ```
 #### 钉钉配置
@@ -39,9 +39,9 @@ exception:
     ## 钉钉配置
     ding-talk:
       web-hook: 钉钉机器人的webHook地址，可依次点击钉钉软件的头像，机器人管理，选中机器人来查看
-      at-phones: 
+      at-mobiles: 
         - 钉钉机器人发送通知时 需要@的钉钉用户账户，可多选
-
+      msg-type: 消息文本类型 目前支持 text markdown
 ```
 #### 企业微信配置
 
