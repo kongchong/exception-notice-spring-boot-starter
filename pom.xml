@@ -6,7 +6,7 @@
     <groupId>com.github.kongchong</groupId>
     <artifactId>exception-notice-spring-boot-starter</artifactId>
     <name>exception-notice-spring-boot-starter</name>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <url>https://github.com/kongchong/exception-notice-spring-boot-starter.git</url>
     <description>a spring boot starter for exception notice</description>
 

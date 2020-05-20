@@ -111,8 +111,8 @@ public class ExceptionInfo {
 
     public String createWeChatMarkDown() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(">项目名称：> <font color=\"info\">").append(project).append("</font>").append("\n");
-        stringBuilder.append(">类路径：> <font color=\"info\">").append(classPath).append("</font>").append("\n");
+        stringBuilder.append(">项目名称：<font color=\"info\">").append(project).append("</font>").append("\n");
+        stringBuilder.append(">类路径：<font color=\"info\">").append(classPath).append("</font>").append("\n");
         stringBuilder.append(">请求地址：<font color=\"info\">").append(reqAddress).append("</font>").append("\n");
         stringBuilder.append(">方法名：<font color=\"info\">").append(methodName).append("</font>").append("\n");
         if (params != null) {
