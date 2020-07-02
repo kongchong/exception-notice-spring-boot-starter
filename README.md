@@ -125,6 +125,9 @@ spring:
 
 ![邮箱](https://tva1.sinaimg.cn/large/006y8mN6gy1g6ffaykd5qj30n80gcwhx.jpg)
 
+企业微信效果:
+
+![企业微信](https://i.loli.net/2020/07/02/zM1up4bX2kyfQGm.png)
 
 由于报错太多没有全部截图下来，感兴趣的同学可以自行测试一下
 
