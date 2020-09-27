@@ -1,6 +1,8 @@
 package com.kc.exception.notice.content;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
+import lombok.SneakyThrows;
 import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
@@ -64,6 +66,8 @@ public class ExceptionInfo {
      */
     private LocalDateTime latestShowTime = LocalDateTime.now();
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     public ExceptionInfo(Throwable ex, String methodName, String filterTrace, Object args, String reqAddress) {
         this.exceptionMessage = gainExceptionMessage(ex);
         this.reqAddress = reqAddress;
@@ -93,6 +97,7 @@ public class ExceptionInfo {
                 String.format("%s-%s", exceptionMessage, traceInfo.size() > 0 ? traceInfo.get(0) : "").getBytes());
     }
 
+    @SneakyThrows
     public String createText() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("项目名称：").append(project).append("\n");
@@ -100,7 +105,7 @@ public class ExceptionInfo {
         stringBuilder.append("请求地址：").append(reqAddress).append("\n");
         stringBuilder.append("方法名：").append(methodName).append("\n");
         if (params != null) {
-            stringBuilder.append("方法参数：").append(params).append("\n");
+            stringBuilder.append("方法参数：").append(objectMapper.writeValueAsString(params)).append("\n");
         }
         stringBuilder.append("异常信息：").append("\n").append(exceptionMessage).append("\n");
         stringBuilder.append("异常追踪：").append("\n").append(String.join("\n", traceInfo)).append("\n");
@@ -109,6 +114,7 @@ public class ExceptionInfo {
         return stringBuilder.toString();
     }
 
+    @SneakyThrows
     public String createWeChatMarkDown() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(">项目名称：<font color=\"info\">").append(project).append("</font>").append("\n");
@@ -116,7 +122,7 @@ public class ExceptionInfo {
         stringBuilder.append(">请求地址：<font color=\"info\">").append(reqAddress).append("</font>").append("\n");
         stringBuilder.append(">方法名：<font color=\"info\">").append(methodName).append("</font>").append("\n");
         if (params != null) {
-            stringBuilder.append(">方法参数：<font color=\"info\">").append(params).append("</font>").append("\n");
+            stringBuilder.append(">方法参数：<font color=\"info\">").append(objectMapper.writeValueAsString(params)).append("</font>").append("\n");
         }
         stringBuilder.append(">异常信息：<font color=\"red\">").append("\n").append(exceptionMessage).append("</font>").append("\n");
         stringBuilder.append(">异常追踪：<font color=\"info\">").append("\n").append(String.join("\n", traceInfo)).append("</font>").append("\n");
@@ -125,6 +131,7 @@ public class ExceptionInfo {
         return stringBuilder.toString();
     }
 
+    @SneakyThrows
     public String createDingTalkMarkDown() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("#### 项目名称：").append("\n").append("> ").append(project).append("\n");
@@ -132,7 +139,7 @@ public class ExceptionInfo {
         stringBuilder.append("#### 请求地址：").append("\n").append("> ").append(reqAddress).append("\n");
         stringBuilder.append("#### 方法名：").append("\n").append("> ").append(methodName).append("\n");
         if (params != null) {
-            stringBuilder.append("#### 方法参数：").append(params).append("\n");
+            stringBuilder.append("#### 方法参数：").append(objectMapper.writeValueAsString(params)).append("\n");
         }
         stringBuilder.append("#### 异常信息：").append("\n").append("> ").append(exceptionMessage).append("\n");
         stringBuilder.append("#### 异常追踪：").append("\n").append("> ").append(String.join("\n", traceInfo)).append("\n");
