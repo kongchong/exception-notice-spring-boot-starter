@@ -5,6 +5,9 @@ import com.kc.exception.notice.content.DingTalkResult;
 import com.kc.exception.notice.content.ExceptionInfo;
 import com.kc.exception.notice.properties.DingTalkProperties;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,7 +34,10 @@ public class DingTalkNoticeProcessor implements INoticeProcessor {
     public void sendNotice(ExceptionInfo exceptionInfo) {
         DingTalkExceptionInfo dingDingNotice = new DingTalkExceptionInfo(exceptionInfo,
                 dingTalkProperties);
-        DingTalkResult result = restTemplate.postForObject(dingTalkProperties.getWebHook(), dingDingNotice, DingTalkResult.class);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<DingTalkExceptionInfo> entity = new HttpEntity<>(dingDingNotice, headers);
+        DingTalkResult result = restTemplate.postForObject(dingTalkProperties.getWebHook(), entity, DingTalkResult.class);
         log.debug(String.valueOf(result));
     }
 
